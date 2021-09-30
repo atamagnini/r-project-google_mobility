@@ -4,7 +4,7 @@ library(highcharter)
 library(lubridate)
 library(htmlwidgets)
 
-dataset <- read.csv('/media/antonela/4E21EC9619AB84D1/R scripts/script_251120_Google_Mobility/Google Mobility/mobility_report_241120.csv')
+dataset <- read.csv('~/mobility_report_241120.csv')
 dataset <- dataset[, -c(3:7)]
 df <- as.data.frame(dataset)
 colnames(df)[4] <- 'Retail and recreation'
@@ -26,12 +26,6 @@ df3 <- df2 %>%
   summarise(across(c(3:8), mean))
 
 #trabajo con numeros
-#df4 <- data.frame(diff(as.matrix(df3[, c(2:7)])))
-#df5 <- df3
-#df5 <- df5[-1, ]
-#df6 <- cbind(df5$date, df4)
-#colnames(df6)[1] <- 'Date'
-#glimpse(df6)
 df7 <- df3 %>% group_by(month = floor_date(date, 'month')) %>%
   summarise(across(c(2:7), mean))
 
